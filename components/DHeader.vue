@@ -28,7 +28,7 @@
         class="relative flex flex-col justify-center md:flex-row md:space-x-4"
       >
         <a
-          class="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-primary rounded-md md:mb-0 md:w-auto hover:scale-105 hover:-translate-y-0.5 transition transform duration-200 ease-in-out"
+          class="flex items-center cursor-pointer w-full px-6 py-3 mb-3 text-lg text-white bg-primary rounded-md md:mb-0 md:w-auto hover:scale-105 hover:-translate-y-0.5 transition transform duration-200 ease-in-out"
           @click.prevent="requestNotification"
         >
           Dowload It Free

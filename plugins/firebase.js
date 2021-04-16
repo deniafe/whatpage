@@ -4,7 +4,7 @@ import firebase from 'firebase'
 if (!firebase.apps.length) {
   // Initialize firebase
   const firebaseConfig = {
-    apiKey: process.env.FIREBASE_API_KEY,
+    apiKey: process.env.configKey,
     authDomain: 'tubely-44839.firebaseapp.com',
     projectId: 'tubely-44839',
     storageBucket: 'tubely-44839.appspot.com',

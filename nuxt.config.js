@@ -34,6 +34,10 @@ export default {
     ],
   },
 
+  env: {
+    configKey: process.env.FIREBASE_API_KEY,
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 

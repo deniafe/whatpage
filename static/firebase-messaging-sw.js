@@ -9,7 +9,7 @@ importScripts('https://www.gstatic.com/firebasejs/8.4.1/firebase-messaging.js')
 // your app's Firebase config object.
 // https://firebase.google.com/docs/web/setup#config-object
 firebase.initializeApp({
-  apiKey: process.env.FIREBASE_API_KEY,
+  apiKey: process.env.configKey,
   authDomain: 'tubely-44839.firebaseapp.com',
   projectId: 'tubely-44839',
   storageBucket: 'tubely-44839.appspot.com',
