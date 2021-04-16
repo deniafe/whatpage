@@ -1,0 +1,16 @@
+/* ./assets/css/tailwind.css */
+:root {
+  --color-primary: #5c6ac4;
+  --color-background: #461818;
+  /* ... */
+}
+
+body {
+  background-color: #221f2e;
+}
+
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
