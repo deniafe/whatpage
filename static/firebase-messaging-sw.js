@@ -2,6 +2,7 @@
 // Give the service worker access to Firebase Messaging.
 // Note that you can only use Firebase Messaging here. Other Firebase libraries
 // are not available in the service worker.
+
 importScripts('https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js')
 importScripts('https://www.gstatic.com/firebasejs/8.4.1/firebase-messaging.js')
 
@@ -9,7 +10,7 @@ importScripts('https://www.gstatic.com/firebasejs/8.4.1/firebase-messaging.js')
 // your app's Firebase config object.
 // https://firebase.google.com/docs/web/setup#config-object
 firebase.initializeApp({
-  apiKey: process.env.configKey,
+  apiKey: 'AIzaSyCvuhT_Pp_hI6sO9UkqPTljyZoTWjcPaSo',
   authDomain: 'tubely-44839.firebaseapp.com',
   projectId: 'tubely-44839',
   storageBucket: 'tubely-44839.appspot.com',
