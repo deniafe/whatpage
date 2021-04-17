@@ -73,7 +73,7 @@ export default {
         .getToken()
         .then((token) => {
           console.log('Here is the user token', token)
-          db.collections('tokens')
+          db.collection('tokens')
             .add({
               token,
               email: 'deniafe@gmail.com',
