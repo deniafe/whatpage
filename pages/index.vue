@@ -24,17 +24,20 @@ export default {
       // hid is used as unique identifier. Do not use `vmid` for it as it will not work
       { hid: 'description', name: 'description', content: 'Meta description' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
-      { property: 'og:url', content: 'http://devrl.link' },
+      { property: 'og:url', content: 'https://csb-cfmxj.vercel.app/' },
       { property: 'og:type', content: 'article' },
-      { property: 'og:title', content: 'Deeviral Page' },
+      {
+        property: 'og:title',
+        content: 'Tubely - Youtube App',
+      },
       {
         property: 'og:description',
-        content: 'The best Viral marketing platform to use',
+        content: 'The best youtube marketing software',
       },
       {
         property: 'og:image',
         content:
-          'https://firebasestorage.googleapis.com/v0/b/telephy-147d6.appspot.com/o/PzJDgebXYOZNbdWE20sOOHhXyYF2%2F342d947fa1e53-A%20whole%20new%20look.jpg?alt=media&token=7b75766f-4786-40b4-bd9e-1c11526e8e32',
+          'https://firebasestorage.googleapis.com/v0/b/tubely-44839.appspot.com/o/tubelyheaderpic.png?alt=media&token=94004848-af31-401e-8f3e-0a5b3500826f',
       },
     ],
   },

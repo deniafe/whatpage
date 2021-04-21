@@ -25,18 +25,19 @@
               Get Access
             </h3>
             <input
+              v-model="form.name"
+              type="text"
+              name="name"
+              class="block w-full px-4 py-3 mb-4 border-2 bg-gray-300 border-transparent border-gray-600 rounded-lg focus:ring focus:ring-gray-600 focus:outline-none"
+              placeholder="Name"
+            />
+            <input
               v-model="form.email"
               type="text"
               name="email"
-              class="block w-full px-4 py-3 mb-4 border-2 bg-gray-300 border-transparent border-gray-600 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
+              class="block w-full px-4 py-3 mb-4 border-2 bg-gray-300 border-transparent border-gray-600 rounded-lg focus:ring focus:ring-gray-600 focus:outline-none"
               placeholder="Email address"
             />
-            <!-- <input
-              type="password"
-              name="password"
-              class="block w-full px-4 py-3 mb-4 border-2 bg-gray-300 border-transparent border-gray-600 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
-              placeholder="Password"
-            /> -->
             <div class="block">
               <button
                 :class="buttonClicked ? 'cursor-not-allowed' : 'cursor-pointer'"
@@ -51,10 +52,6 @@
                 {{ buttonClicked ? 'Processing' : 'Download Now' }}
               </button>
             </div>
-            <!-- <p class="w-full mt-4 text-sm text-center text-gray-500">
-              Don't have an account?
-              <a href="#_" class="text-primary underline">Sign up here</a>
-            </p> -->
           </div>
         </div>
       </div>
@@ -63,13 +60,16 @@
 </template>
 
 <script>
-import { db } from '@/plugins/firebase'
+import { nanoid } from 'nanoid'
+// import { db } from '@/plugins/firebase'
 export default {
   data() {
     return {
       buttonClicked: false,
       form: {
-        email: 'debby@email.com',
+        email: '',
+        name: '',
+        uid: '',
         country: '',
         region: '',
         countryCode: '',
@@ -83,44 +83,69 @@ export default {
   },
   mounted() {
     this.getIp()
-    this.IPLookUp()
+    this.geoLookup()
   },
   methods: {
     addUser() {
-      const vm = this
+      // const vm = this
       this.buttonClicked = true
-      db.collection('users')
-        .add(this.form)
-        .then((docRef) => {
-          vm.$router.push({
-            name: 'share',
-            params: { lead: docRef.id },
-          })
-        })
-        .catch((error) => {
-          console.error('Error adding document: ', error)
-        })
+      this.form.uid = nanoid()
+      // db.collection('users')
+      //   .add(this.form)
+      //   .then((docRef) => {
+      //     vm.$router.push({
+      //       name: 'share',
+      //       params: { lead: docRef.id },
+      //     })
+      //   })
+      //   .catch((error) => {
+      //     console.error('Error adding document: ', error)
+      //   })
     },
     getIp() {
-      const vm = this
-      fetch('https://api.ipify.org?format=json')
-        .then((x) => x.json())
-        .then((res) => {
-          console.log(`Getting user's ip address: `, res)
-          vm.form.ip = res.ip
-        })
+      try {
+        const vm = this
+        fetch('https://api.ipify.org?format=json')
+          .then((x) => x.json())
+          .then((res) => {
+            console.log(`Getting user's ip address: `, res)
+            vm.form.ip = res.ip
+            this.IPLookUp()
+          })
+      } catch (error) {
+        console.log(error)
+      }
     },
     IPLookUp() {
       const vm = this
-      fetch('http://ip-api.com/json')
+      fetch('https://api.ipgeolocationapi.com/geolocate/' + this.form.ip)
         .then((x) => x.json())
         .then((res) => {
           console.log(`Getting user's geo details: `, res)
-          vm.form.country = res.country
-          vm.form.region = res.regionName
-          vm.form.countryCode = res.countryCode
-          vm.form.ip = res.ip
+          vm.form.country = res.name
+          vm.form.countryCode = res.alpha2
         })
+    },
+    geoLookup() {
+      const myHeaders = new Headers()
+      myHeaders.append(
+        'Cookie',
+        '__cfduid=d7e8c20f99a27dcbc00a98e07f4be4b931618818890'
+      )
+
+      const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow',
+      }
+
+      fetch(
+        'https://api.ipgeolocationapi.com/geolocate/197.242.97.21',
+        requestOptions
+      )
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.log('error', error))
     },
   },
 }

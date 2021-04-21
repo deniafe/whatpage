@@ -8,36 +8,91 @@
         http://instagram.devrl.link
       </div>
       <i
-        aria-hidden="true"
-        class="far fa-copy col-span-1 justify-self-end text-primary"
+        :class="copied ? 'fa fa-check' : 'far fa-copy'"
+        class="col-span-1 justify-self-end text-primary"
+        @click.stop.prevent="copyLink"
       ></i>
+      <input id="ref-link" type="hidden" :value="link" />
     </div>
     <div class="grid grid-cols-6 mt-6 mx-4 md:grid-cols-12 lg:grid-cols-7">
-      <i
-        v-for="(icon, i) in icons"
+      <a
+        v-for="(social, i) in socials"
         :key="i"
-        :class="icon"
-        class="text-base pb-2"
-      ></i>
+        target="_blank"
+        :href="social.href"
+        style="color: rgb(255, 26, 64)"
+      >
+        <i :class="social.icon" class="text-base pb-2"></i>
+      </a>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'Refer',
   data() {
     return {
-      icons: [
-        'fas fa-envelope-open text-primary col-span-1',
-        'fab fa-facebook-messenger',
-        'fab fa-twitter',
-        'fab fa-facebook-f',
-        'fab fa-pinterest',
-        'fab fa-whatsapp',
-        'fab fa-telegram',
+      socials: [
+        {
+          href:
+            'http://www.facebook.com/sharer/sharer.php?u=https://csb-cfmxj.vercel.app/',
+          icon: 'fab fa-facebook-f',
+        },
+        {
+          href:
+            'https://www.pinterest.com/pin/create/button/?url=https://vy.tc/jMcJj83&amp;media=https://cdn.vyper.io/0952f47a-f6f9-4c59-aa62-558054c9d691/-/quality/lighter/-/format/auto/null',
+          icon: 'fab fa-pinterest',
+        },
+        {
+          href:
+            'https://web.whatsapp.com/send?text=https://vy.tc/jMcJj83 This%20contest%20is%20amazing!',
+          icon: 'fab fa-whatsapp',
+        },
+        {
+          href:
+            'https://telegram.me/share/url?url=https://vy.tc/jMcJj83&amp;text=This%20contest%20is%20amazing!',
+          icon: 'fab fa-telegram',
+        },
+        {
+          href: 'https://twitter.com/intent/tweet?url=https://vy.tc/jMcJj83',
+          icon: 'fab fa-twitter',
+        },
+        {
+          href:
+            'fb-messenger://share/?link=https://vy.tc/jMcJj83&amp;app_id=1011451708909975',
+          icon: 'fab fa-facebook-messenger',
+        },
+        {
+          href:
+            'mailto:?body=This%20contest%20is%20amazing! https://vy.tc/jMcJj83',
+          icon: 'fas fa-envelope-open text-primary col-span-1',
+        },
       ],
     }
+  },
+  computed: {
+    ...mapGetters({
+      uniqueLink: 'share/uniqueLink',
+    }),
+  },
+  methods: {
+    copyLink() {
+      const refLinkToCopy = document.querySelector('#ref-link')
+      refLinkToCopy.setAttribute('type', 'text') // 不是 hidden 才能複製
+      refLinkToCopy.select()
+      try {
+        document.execCommand('copy')
+        this.copied = true
+      } catch (err) {
+        alert('Oops, unable to copy')
+      }
+      /* unselect the range */
+      refLinkToCopy.setAttribute('type', 'hidden')
+      window.getSelection().removeAllRanges()
+      setTimeout(() => (this.copied = false), 3000)
+    },
   },
 }
 </script>
