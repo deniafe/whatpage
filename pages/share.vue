@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       browserHeight: '',
-      tab: 'actions',
+      tab: 'rewards',
     }
   },
   head: {
@@ -70,10 +70,17 @@ export default {
   },
   mounted() {
     this.browserHeight = document.body.clientHeight
+    const browserWidth = document.body.clientWidth
+    this.checkWidth(browserWidth)
   },
   methods: {
     change(tab) {
       this.tab = tab
+    },
+    checkWidth(width) {
+      if (width < 1024) {
+        this.tab = 'actions'
+      }
     },
   },
 }

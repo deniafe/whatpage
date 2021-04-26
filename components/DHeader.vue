@@ -64,29 +64,7 @@
 </template>
 
 <script>
-import { firebase, db } from '@/plugins/firebase'
-export default {
-  methods: {
-    requestNotification() {
-      firebase
-        .messaging()
-        .getToken()
-        .then((token) => {
-          console.log('Here is the user token', token)
-          db.collection('tokens')
-            .add({
-              token,
-              email: 'deniafe@gmail.com',
-              uid: 'gfdtrfsedwe1234532dsffd',
-            })
-            .then(() => {
-              console.log('success')
-            })
-        })
-        .catch((err) => console.log(`User did not give us the permission`, err))
-    },
-  },
-}
+export default {}
 </script>
 
 <style></style>

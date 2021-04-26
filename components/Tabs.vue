@@ -28,10 +28,19 @@
 
 <script>
 export default {
+  props: {
+    tabAction: {
+      type: String,
+      default: 'actions',
+    },
+  },
   data() {
     return {
-      tab: 'actions',
+      tab: '',
     }
+  },
+  mounted() {
+    this.tab = this.tabAction
   },
   methods: {
     change(tab) {

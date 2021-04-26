@@ -10,6 +10,7 @@
     <div
       v-if="properties.buttonText"
       class="rounded-md bg-primary text-center grid items-center py-3 mt-4 text-white cursor-pointer hover:scale-105 transition transform duration-200 ease-in-out"
+      @click="properties.func"
     >
       {{ properties.buttonText }}
     </div>

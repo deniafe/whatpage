@@ -61,7 +61,8 @@
 
 <script>
 import { nanoid } from 'nanoid'
-// import { db } from '@/plugins/firebase'
+import { db, firebase } from '@/plugins/firebase'
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -77,30 +78,37 @@ export default {
         token: '',
         referralPoints: 0,
         socialPoints: 0,
-        registeredAt: Date.now(),
+        offerPoints: 0,
+        registeredAt: firebase.firestore.Timestamp.fromDate(new Date()),
       },
     }
   },
+  computed: {
+    ...mapGetters({
+      url: 'app/url',
+    }),
+  },
   mounted() {
     this.getIp()
-    this.geoLookup()
+    // this.geoLookup()
   },
   methods: {
     addUser() {
-      // const vm = this
+      const vm = this
       this.buttonClicked = true
       this.form.uid = nanoid()
-      // db.collection('users')
-      //   .add(this.form)
-      //   .then((docRef) => {
-      //     vm.$router.push({
-      //       name: 'share',
-      //       params: { lead: docRef.id },
-      //     })
-      //   })
-      //   .catch((error) => {
-      //     console.error('Error adding document: ', error)
-      //   })
+      this.form.uniqueLink = this.url + this.form.uid
+      db.collection('leads')
+        .add(this.form)
+        .then((docRef) => {
+          vm.$router.push({
+            name: 'share',
+            params: { lead: docRef.id },
+          })
+        })
+        .catch((error) => {
+          console.error('Error adding document: ', error)
+        })
     },
     getIp() {
       try {
@@ -125,27 +133,6 @@ export default {
           vm.form.country = res.name
           vm.form.countryCode = res.alpha2
         })
-    },
-    geoLookup() {
-      const myHeaders = new Headers()
-      myHeaders.append(
-        'Cookie',
-        '__cfduid=d7e8c20f99a27dcbc00a98e07f4be4b931618818890'
-      )
-
-      const requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow',
-      }
-
-      fetch(
-        'https://api.ipgeolocationapi.com/geolocate/197.242.97.21',
-        requestOptions
-      )
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.log('error', error))
     },
   },
 }
