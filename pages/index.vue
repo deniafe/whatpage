@@ -28,14 +28,14 @@ export default {
       // hid is used as unique identifier. Do not use `vmid` for it as it will not work
       { hid: 'description', name: 'description', content: 'Meta description' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
-      {
-        name: 'description',
-        content: 'The best youtube marketing software',
-      },
-      {
-        name: 'author',
-        content: 'The best youtube marketing software',
-      },
+      // {
+      //   name: 'description',
+      //   content: 'The best youtube marketing software',
+      // },
+      // {
+      //   name: 'author',
+      //   content: 'The best youtube marketing software',
+      // },
       { property: 'og:locale', content: 'en_US' },
       { property: 'og:url', content: 'https://csb-cfmxj.vercel.app/' },
       { property: 'og:type', content: 'article' },
@@ -53,29 +53,28 @@ export default {
           'https://firebasestorage.googleapis.com/v0/b/tubely-44839.appspot.com/o/tubelyheaderpic.png?alt=media&token=94004848-af31-401e-8f3e-0a5b3500826f',
       },
       { property: 'twitter:card', content: 'summary_large_image' },
-      { property: 'og:type', content: 'article' },
-      {
-        property: 'twitter:title',
-        content: 'Tubely - Youtube App',
-      },
-      {
-        property: 'twitter:description',
-        content: 'The best youtube marketing software',
-      },
-      {
-        property: 'twitter:image:src',
-        content:
-          'https://firebasestorage.googleapis.com/v0/b/tubely-44839.appspot.com/o/tubelyheaderpic.png?alt=media&token=94004848-af31-401e-8f3e-0a5b3500826f',
-      },
-      {
-        itemprop: 'image',
-        content:
-          'https://firebasestorage.googleapis.com/v0/b/tubely-44839.appspot.com/o/tubelyheaderpic.png?alt=media&token=94004848-af31-401e-8f3e-0a5b3500826f',
-      },
-      {
-        itemprop: 'name',
-        content: 'Tubely - Youtube App',
-      },
+      // {
+      //   property: 'twitter:title',
+      //   content: 'Tubely - Youtube App',
+      // },
+      // {
+      //   property: 'twitter:description',
+      //   content: 'The best youtube marketing software',
+      // },
+      // {
+      //   property: 'twitter:image:src',
+      //   content:
+      //     'https://firebasestorage.googleapis.com/v0/b/tubely-44839.appspot.com/o/tubelyheaderpic.png?alt=media&token=94004848-af31-401e-8f3e-0a5b3500826f',
+      // },
+      // {
+      //   itemprop: 'image',
+      //   content:
+      //     'https://firebasestorage.googleapis.com/v0/b/tubely-44839.appspot.com/o/tubelyheaderpic.png?alt=media&token=94004848-af31-401e-8f3e-0a5b3500826f',
+      // },
+      // {
+      //   itemprop: 'name',
+      //   content: 'Tubely - Youtube App',
+      // },
     ],
   },
 }
