@@ -50,7 +50,7 @@ export default {
       {
         property: 'og:image',
         content:
-          'https://firebasestorage.googleapis.com/v0/b/tubely-44839.appspot.com/o/tubelyheaderpic.png?alt=media&token=94004848-af31-401e-8f3e-0a5b3500826f',
+          'https://firebasestorage.googleapis.com/v0/b/tubely-44839.appspot.com/o/tubelyheaderpic.jpg?alt=media&token=c28f13bf-d3ec-4904-b63c-58bfbad35454',
       },
       { property: 'twitter:card', content: 'summary_large_image' },
       // {
