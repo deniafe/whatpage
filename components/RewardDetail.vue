@@ -10,8 +10,16 @@
     <div
       v-if="properties.buttonText"
       class="rounded-md bg-primary text-center grid items-center py-3 mt-4 text-white cursor-pointer hover:scale-105 transition transform duration-200 ease-in-out"
+      @click="properties.func"
     >
-      {{ properties.buttonText }}
+      <i
+        v-if="rewardLoading"
+        class="fa fa-spinner animate-spin inline-block"
+        aria-hidden="true"
+      ></i>
+      <span>{{
+        rewardLoading ? 'Claiming reward ...' : properties.buttonText
+      }}</span>
     </div>
     <div
       v-if="properties.description"
@@ -23,6 +31,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'Custom',
   props: {
@@ -35,6 +44,11 @@ export default {
   },
   data() {
     return {}
+  },
+  computed: {
+    ...mapGetters({
+      rewardLoading: 'app/rewardLoading',
+    }),
   },
 }
 </script>

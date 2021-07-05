@@ -42,14 +42,14 @@
                 />
               </div>
               <div class="flex flex-col items-start justify-center">
-                <h4 class="font-bold text-gray-200">John Doe</h4>
-                <p class="text-gray-400">CEO of Something</p>
+                <h4 class="font-bold text-gray-200">Mark Yarbrough</h4>
+                <p class="text-gray-400">Content Creator</p>
               </div>
             </div>
             <blockquote class="mt-8 text-lg text-gray-400">
-              "This is a no-brainer if you want to take your business to the
-              next level. If you are looking for the ultimate toolset, this is
-              it!"
+              "This is a no-brainer if you want to take your business on youtube
+              to the next level. If you are looking for the ultimate toolset,
+              this is it!"
             </blockquote>
           </div>
           <div
@@ -65,13 +65,13 @@
                 />
               </div>
               <div class="flex flex-col items-start justify-center">
-                <h4 class="font-bold text-gray-200">Jane Doe</h4>
-                <p class="text-gray-400">CTO of Business</p>
+                <h4 class="font-bold text-gray-200">Ella clone</h4>
+                <p class="text-gray-400">Youtube Vlogger</p>
               </div>
             </div>
             <blockquote class="mt-8 text-lg text-gray-400">
-              "Thanks for creating this service. My life is so much easier.
-              Thanks for making such a great product."
+              "Thanks for creating this software. Tubely has made my life so
+              much easier. Thanks for making such a great product."
             </blockquote>
           </div>
           <div
@@ -87,13 +87,13 @@
                 />
               </div>
               <div class="flex flex-col items-start justify-center">
-                <h4 class="font-bold text-gray-200">John Smith</h4>
-                <p class="text-gray-400">Creator of Stuff</p>
+                <h4 class="font-bold text-gray-200">Penn Thomas Mason</h4>
+                <p class="text-gray-400">Youtube Business Owner</p>
               </div>
             </div>
             <blockquote class="mt-8 text-lg text-gray-400">
-              "Packed with awesome content and exactly what I was looking for. I
-              would highly recommend this to anyone."
+              "Tubely is packed with awesome features and exactly what I was
+              looking for. I would highly recommend this to anyone."
             </blockquote>
           </div>
         </div>

@@ -5,14 +5,14 @@
         class="col-span-3 lg:text-sm border-transparent"
         contenteditable="true"
       >
-        http://instagram.devrl.link
+        {{ user ? user.uniqueLink : 'url' }}
       </div>
       <i
         :class="copied ? 'fa fa-check' : 'far fa-copy'"
         class="col-span-1 justify-self-end text-primary"
         @click.stop.prevent="copyLink"
       ></i>
-      <input id="ref-link" type="hidden" :value="link" />
+      <input id="ref-link" type="hidden" :value="user.uniqueLink" />
     </div>
     <div class="grid grid-cols-6 mt-6 mx-4 md:grid-cols-12 lg:grid-cols-7">
       <a
@@ -42,7 +42,7 @@ export default {
         },
         {
           href:
-            'https://www.pinterest.com/pin/create/button/?url=https://csb-cfmxj.vercel.app/&amp;media=https://cdn.vyper.io/0952f47a-f6f9-4c59-aa62-558054c9d691/-/quality/lighter/-/format/auto/null',
+            'https://www.pinterest.com/pin-builder/?url=https://csb-cfmxj.vercel.app&media=https://bit.ly/3vjJeih&method=button',
           icon: 'fab fa-pinterest',
         },
         {
@@ -72,7 +72,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      uniqueLink: 'share/uniqueLink',
+      user: 'app/user',
     }),
   },
   methods: {

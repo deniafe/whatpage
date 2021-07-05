@@ -17,18 +17,18 @@
         class="ml-8 md:ml-2 mt-4 lg:mt-2 col-span-3 md:col-span-4 lg:col-span-9"
       >
         <div class="hidden lg:grid mb-2 text-2xl text-white font-medium">
-          You
+          {{ user ? name : 'You' }}
         </div>
         <div class="grid grid-cols-2 mb-2 lg:mb-1">
-          <div class="text-sm md:text-base text-primary">1 Points</div>
+          <div class="text-sm md:text-base text-primary">
+            {{ user ? totalPoints : 0 }} Points
+          </div>
           <div
             class="text-xs md:text-sm lg:text-xs uppercase text-white justify-self-end"
-          >
-            Rank #2180
-          </div>
+          ></div>
         </div>
         <div class="h-3 bg-gray-300 rounded-full">
-          <div class="h-full w-3/12 rounded-full bg-primary"></div>
+          <div class="h-full rounded-full bg-primary" :style="styling"></div>
         </div>
       </div>
     </div>
@@ -36,7 +36,28 @@
 </template>
 
 <script>
-export default {}
+import { mapGetters } from 'vuex'
+export default {
+  computed: {
+    ...mapGetters({
+      user: 'app/user',
+    }),
+    totalPoints() {
+      return this.user.totalPoints
+    },
+    name() {
+      return this.user.name || this.user.email
+    },
+    progress() {
+      return (this.totalPoints / 1000) * 100
+    },
+    styling() {
+      return {
+        width: `${this.progress}%`,
+      }
+    },
+  },
+}
 </script>
 
 <style scoped>

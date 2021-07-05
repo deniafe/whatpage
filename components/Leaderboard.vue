@@ -6,17 +6,19 @@
       <div
         class="col-span-1 text-red-300 text-lg justify-self-end font-bold pr-4"
       >
-        # {{ user.rank }}
+        # {{ rank + 1 }}
       </div>
       <img
         class="col-span-2 md:col-span-1 w-14 h-14 rounded-md"
-        :src="user.image"
+        src="/tubelylogo1.png"
       />
       <div class="col-span-3 md:col-span-4">
         <div class="text-sm md:text-base text-primary">
-          {{ user.points }} points
+          {{ user.totalPoints }} points
         </div>
-        <div class="text-sm md:text-base text-red-300">{{ user.comments }}</div>
+        <div class="text-sm md:text-base text-red-300">
+          {{ user.name || user.email }}
+        </div>
       </div>
     </div>
   </div>
@@ -26,6 +28,10 @@
 export default {
   name: 'Action',
   props: {
+    rank: {
+      type: Number,
+      required: true,
+    },
     user: {
       type: Object,
       required: true,

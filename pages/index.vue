@@ -1,9 +1,12 @@
 <template>
   <div>
+    <Alert />
     <div>
+      <LoginDialog />
       <Nav />
       <DHeader />
       <DFeatures />
+      <Features />
       <Testimonial />
       <CTA />
       <Footer />
@@ -14,10 +17,10 @@
 <script>
 // import Testimonial from '~/components/Testimonial.vue'
 export default {
-  fetch({ req, store }) {
-    const host = req.headers.host
-    store.commit('app/SET_APP_URL', host)
-  },
+  // fetch({ req, store }) {
+  //   const host = req.headers.host
+  //   store.commit('app/SET_APP_URL', host)
+  // },
   // components: { Testimonial },
   head: {
     titleTemplate: '%s - Tubely',
@@ -76,6 +79,10 @@ export default {
       //   content: 'Tubely - Youtube App',
       // },
     ],
+  },
+  mounted() {
+    const ref = this.$route.query.ref
+    if (ref) this.$store.commit('app/SET_REF', ref)
   },
 }
 </script>

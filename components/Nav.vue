@@ -18,13 +18,19 @@
     <div
       class="justify-self-end self-center content-center grid text-xs bg-white hover:bg-primary hover:text-gray-200 text-gray-800 px-3 py-2 rounded-sm cursor-pointer hover:scale-105 hover:-translate-y-0.5 transition transform duration-200 ease-in-out"
     >
-      <span class="inline-block">Login</span>
+      <span class="inline-block cursor-pointer" @click="showLogin">Login</span>
     </div>
   </nav>
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    showLogin() {
+      this.$store.commit('app/SET_LOGIN_DIALOG', true)
+    },
+  },
+}
 </script>
 
 <style></style>

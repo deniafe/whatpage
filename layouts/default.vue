@@ -5,15 +5,30 @@
 </template>
 
 <script>
-import { firebase } from '@/plugins/firebase'
+import { auth } from '@/plugins/firebase'
 export default {
-  mounted() {
-    firebase.messaging().onMessage((payload) => {
-      console.log('Message received from the front end. ', payload)
-      // ...
-    })
+  beforeDestroy() {
+    auth.signOut()
   },
 }
 </script>
 
-<style></style>
+<style type="text/css">
+::-webkit-scrollbar {
+  width: 1px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 1px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: transparent;
+}
+</style>

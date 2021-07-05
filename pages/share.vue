@@ -1,6 +1,10 @@
 <template>
   <div class="w-screen bg-secondary" :style="divStyle">
+    <Alert />
     <EmailConfirm />
+    <OfferDialog />
+    <AccDetailsDialog />
+    <ShareNav />
     <div class="px-6 lg:hidden">
       <Profile />
       <Tabs @tab="change" />
@@ -20,6 +24,8 @@
 </template>
 
 <script>
+import { db } from '@/plugins/firebase'
+import { mapGetters } from 'vuex'
 const Actions = () => import('../components/Actions')
 const Rewards = () => import('../components/Rewards')
 const Leaderboards = () => import('../components/Leaderboards')
@@ -29,6 +35,7 @@ export default {
     return {
       browserHeight: '',
       tab: 'rewards',
+      unsubscribe: '',
     }
   },
   head: {
@@ -55,6 +62,10 @@ export default {
     ],
   },
   computed: {
+    ...mapGetters({
+      user: 'app/user',
+      authUser: 'auth/user',
+    }),
     divStyle() {
       return {
         minHeight: this.browserHeight + 'px',
@@ -68,10 +79,22 @@ export default {
       return result
     },
   },
+  watch: {
+    authUser(newValue, oldValue) {
+      if (newValue) {
+        this.getUser()
+        console.log('New Value: ', newValue)
+      }
+    },
+  },
   mounted() {
+    this.$store.dispatch('auth/checkAuth')
     this.browserHeight = document.body.clientHeight
     const browserWidth = document.body.clientWidth
     this.checkWidth(browserWidth)
+  },
+  beforeDestroy() {
+    if (this.unsubscribe) this.unsubscribe()
   },
   methods: {
     change(tab) {
@@ -81,6 +104,37 @@ export default {
       if (width < 1024) {
         this.tab = 'actions'
       }
+    },
+    getUser() {
+      const vm = this
+      this.unsubscribe = db
+        .collection('users')
+        .where('email', '==', vm.user.email)
+        .onSnapshot(
+          (snapshot) => {
+            // ...
+            snapshot.docChanges().forEach((change) => {
+              if (change.type === 'added') {
+                const user = change.doc.data()
+                user.id = change.doc.id
+                vm.$store.commit('app/SET_USER', user)
+              }
+              if (change.type === 'modified') {
+                const user = change.doc.data()
+                user.id = snapshot.id
+                vm.$store.commit('app/SET_USER', user)
+              }
+              if (change.type === 'removed') {
+                console.log('Removed city: ', change.doc.data())
+              }
+            })
+          },
+          (error) => {
+            // ...
+            console.log('Could not listen to changes on this snapshot:', error)
+            vm.$router.push({ name: 'index' })
+          }
+        )
     },
   },
 }

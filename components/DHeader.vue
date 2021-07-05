@@ -29,7 +29,7 @@
       >
         <a
           class="flex items-center cursor-pointer w-full px-6 py-3 mb-3 text-lg text-white bg-primary rounded-md md:mb-0 md:w-auto hover:scale-105 hover:-translate-y-0.5 transition transform duration-200 ease-in-out"
-          @click.prevent="requestNotification"
+          @click.prevent="scroll('cta')"
         >
           Dowload It Free
 
@@ -48,8 +48,8 @@
           </svg>
         </a>
         <a
-          href="#_"
-          class="flex items-center px-6 py-3 text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600 hover:scale-105 hover:-translate-y-0.5 transition transform duration-200 ease-in-out"
+          class="flex items-center cursor-pointer px-6 py-3 text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600 hover:scale-105 hover:-translate-y-0.5 transition transform duration-200 ease-in-out"
+          @click.prevent="scroll('desc')"
         >
           Learn More
         </a>
@@ -64,7 +64,15 @@
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    scroll(id) {
+      document.getElementById(id).scrollIntoView({
+        behavior: 'smooth',
+      })
+    },
+  },
+}
 </script>
 
 <style></style>

@@ -5,7 +5,7 @@ export default {
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'tubepage',
+    title: 'Tubely',
     htmlAttrs: {
       lang: 'en',
     },
@@ -46,6 +46,7 @@ export default {
     {
       src: '~/plugins/firebase.js',
     },
+    { src: '~/plugins/vuelidate.js' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
