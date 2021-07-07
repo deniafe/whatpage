@@ -74,6 +74,9 @@ export default {
     setUser({ commit }, userData) {
       commit('SET_USER', userData)
     },
+    setLoginDialog({ commit }, status) {
+      commit('SET_LOGIN_DIALOG', status)
+    },
     AMOffers({ commit }) {
       console.log('Am offers has been called')
       commit('SET_OFFERS_LOADING', true)

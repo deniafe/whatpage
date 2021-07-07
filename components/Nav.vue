@@ -11,7 +11,7 @@
       href="#_"
       class="relative z-10 flex items-center w-auto text-base md:text-xl font-extrabold leading-none text-white select-none"
       ><img
-        src="/tubelylogo1.png"
+        src="/TubelyLogo.png"
         class="h-8 w-8 mr-2 md:h-10 md:w-10 md:mr-2"
       />Tubely</a
     >

@@ -34,38 +34,6 @@ export default {
   name: 'Refer',
   data() {
     return {
-      socials: [
-        {
-          href:
-            'http://www.facebook.com/sharer/sharer.php?u=https://csb-cfmxj.vercel.app/',
-          icon: 'fab fa-facebook-f',
-        },
-        {
-          href:
-            'https://www.pinterest.com/pin-builder/?url=https://csb-cfmxj.vercel.app&media=https://bit.ly/3vjJeih&method=button',
-          icon: 'fab fa-pinterest',
-        },
-        {
-          href:
-            'https://web.whatsapp.com/send?text=https://csb-cfmxj.vercel.app This%20contest%20is%20amazing!',
-          icon: 'fab fa-whatsapp',
-        },
-        {
-          href:
-            'https://telegram.me/share/url?url=https://csb-cfmxj.vercel.app/&amp;text=This%20contest%20is%20amazing!',
-          icon: 'fab fa-telegram',
-        },
-        {
-          href:
-            'https://twitter.com/intent/tweet?url=https://csb-cfmxj.vercel.app/',
-          icon: 'fab fa-twitter',
-        },
-        {
-          href:
-            'mailto:?body=This%20contest%20is%20amazing! https://csb-cfmxj.vercel.app/',
-          icon: 'fas fa-envelope-open text-primary col-span-1',
-        },
-      ],
       link: ' http://instagram.devrl.link',
       copied: false,
     }
@@ -74,6 +42,34 @@ export default {
     ...mapGetters({
       user: 'app/user',
     }),
+    socials() {
+      return [
+        {
+          href: `http://www.facebook.com/sharer/sharer.php?u=${this.user.uniqueLink}`,
+          icon: 'fab fa-facebook-f',
+        },
+        {
+          href: `https://www.pinterest.com/pin-builder/?url=${this.user.uniqueLink}&media=https://bit.ly/3vjJeih&method=button`,
+          icon: 'fab fa-pinterest',
+        },
+        {
+          href: `https://web.whatsapp.com/send?text=${this.user.uniqueLink} This%20app%20is%20amazing!`,
+          icon: 'fab fa-whatsapp',
+        },
+        {
+          href: `https://telegram.me/share/url?url=${this.user.uniqueLink}&text=This%20contest%20is%20amazing!`,
+          icon: 'fab fa-telegram',
+        },
+        {
+          href: `https://twitter.com/intent/tweet?url=${this.user.uniqueLink}`,
+          icon: 'fab fa-twitter',
+        },
+        {
+          href: `mailto:?body=This%20contest%20is%20amazing! ${this.user.uniqueLink}`,
+          icon: 'fas fa-envelope-open text-primary col-span-1',
+        },
+      ]
+    },
   },
   methods: {
     copyLink() {

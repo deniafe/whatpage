@@ -69,6 +69,7 @@ export default {
             const offerPoints = form.offerPoints
             const totalPoints = form.totalPoints
             const registeredAt = form.registeredAt
+            const referredBy = form.referredBy
             const ip = form.ip
             const token = form.token
             cred.user.sendEmailVerification()
@@ -87,6 +88,7 @@ export default {
                     offerPoints,
                     totalPoints,
                     registeredAt,
+                    referredBy,
                     ip,
                     token,
                     uniqueLink: res,
@@ -118,6 +120,7 @@ export default {
                   offerPoints,
                   totalPoints,
                   registeredAt,
+                  referredBy,
                   ip,
                   token,
                   uniqueLink: res,
@@ -139,6 +142,7 @@ export default {
           }
 
           if (form.state === 'Log In') {
+            console.log('I just logged in')
             db.collection('users')
               .doc(id)
               .get()
@@ -154,6 +158,7 @@ export default {
                   offerPoints: data.offerPoints,
                   totalPoints: data.totalPoints,
                   registeredAt: data.registeredAt,
+                  referredBy: data.referredBy,
                   ip: data.ip,
                   token: data.token,
                   uniqueLink: data.uniqueLink,
@@ -168,10 +173,24 @@ export default {
                   params: { lead: id },
                 })
               })
+              .catch((error) => {
+                commit('SET_LOADING', false)
+                dispatch('app/setLoginDialog', false, { root: true })
+                // Handle any errors
+                const alert = {}
+                alert.status = true
+                alert.message = error
+
+                notific({
+                  dispatch,
+                  message: alert,
+                })
+              })
           }
         })
         .catch((error) => {
           commit('SET_LOADING', false)
+          dispatch('app/setLoginDialog', false, { root: true })
           // Handle any errors
           const alert = {}
           alert.status = true

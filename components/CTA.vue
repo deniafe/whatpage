@@ -120,6 +120,7 @@ export default {
         ip: '',
         token: '',
         referralPoints: 0,
+        referredBy: '',
         youtubePoints: 0,
         telegramPoints: 0,
         offerPoints: 0,
@@ -166,7 +167,6 @@ export default {
 
       // Check to make sure the lead does not exist in the database
       try {
-        // If thisperson is not being referred by anyone!
         if (this.ref) {
           this.$store.commit('auth/SET_LOADING', true)
           const query = await db
@@ -175,6 +175,7 @@ export default {
             .get()
 
           if (!query.empty) {
+            console.log('The query is not empty: ', query.docs[0].data())
             const alert = {}
             alert.status = true
             alert.message = `Uh oh!! You have already registered for this contest! You can't register twice`
