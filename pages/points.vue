@@ -40,28 +40,34 @@ export default {
       },
     }
   },
-  // fetch(context) {
-  //   const { store, app, redirect } = context
-  //   const network = store.state.app.offerNetwork
+  fetch(context) {
+    const { store, app, redirect } = context
+    const network = store.state.app.offerNetwork
 
-  //   if (!network) redirect({ name: 'share' })
+    if (!network) redirect({ name: 'share' })
 
-  //   return (() => {
-  // if (network === 'OG') {
-  //   app.head.script.push({
-  //     src:
-  //       'https://www.locked1.com/cl/load.php?id=74edcfaeb899df73f6485b4cd899f798',
-  //     type: 'text/javascript',
-  //     id: 'ogjs',
-  //   })
-  // } else if (network === 'AM') {
-  //   app.head.script.push({
-  //     src: 'http://www.loktrk.com/gLoader.php?GID=61188&go=&sid=',
-  //     type: 'text/javascript',
-  //   })
-  // }
-  //   })()
-  // },
+    return (() => {
+      app.head.script.push({
+        src:
+          'https://www.locked2.com/cl.php?id=74edcfaeb899df73f6485b4cd899f798',
+        type: 'text/javascript',
+        id: 'ogjs',
+      })
+      // if (network === 'OG') {
+      //   app.head.script.push({
+      //     src:
+      //       'https://www.locked1.com/cl/load.php?id=74edcfaeb899df73f6485b4cd899f798',
+      //     type: 'text/javascript',
+      //     id: 'ogjs',
+      //   })
+      // } else if (network === 'AM') {
+      //   app.head.script.push({
+      //     src: 'http://www.loktrk.com/gLoader.php?GID=61188&go=&sid=',
+      //     type: 'text/javascript',
+      //   })
+      // }
+    })()
+  },
   head: {
     titleTemplate: '%s - Generate Points',
     htmlAttrs: {
@@ -72,7 +78,8 @@ export default {
         src: 'https://use.fontawesome.com/1bd36333df.js',
       },
       {
-        src: 'http://www.loktrk.com/gLoader.php?GID=61188&go=&sid=',
+        src:
+          'https://www.locked2.com/cl.php?id=74edcfaeb899df73f6485b4cd899f798',
         type: 'text/javascript',
       },
     ],
@@ -86,9 +93,9 @@ export default {
     this.$store.dispatch('auth/checkAuth')
   },
   methods: {
-    showDialog() {
-      this.$store.commit('app/SET_POINTS_DIALOG', true)
-    },
+    // showDialog() {
+    //   this.$store.commit('app/SET_POINTS_DIALOG', true)
+    // },
   },
 }
 </script>

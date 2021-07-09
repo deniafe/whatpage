@@ -172,6 +172,7 @@ export default {
                   name: 'share',
                   params: { lead: id },
                 })
+                dispatch('app/setLoginDialog', false, { root: true })
               })
               .catch((error) => {
                 commit('SET_LOADING', false)

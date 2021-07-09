@@ -4,10 +4,12 @@
   >
     <img class="w-full h-1/2" :src="offer.image" />
     <div class="pt-1">
-      <div class="font-bold text-white text-sm mb-2">
+      <div class="font-bold text-white text-center text-sm mb-2">
         {{ offer.name }}
       </div>
-      <p class="text-primary font-bold text-base">{{ points }} Points</p>
+      <p class="text-primary font-bold text-center text-base">
+        +{{ points }} Points
+      </p>
     </div>
     <div class="pt-1 px-2 pb-2">
       <a

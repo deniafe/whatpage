@@ -149,73 +149,63 @@ export default {
             },
           },
         },
-
-        // {
-        //   component: Custom,
-        //   title: {
-        //     text: 'Complete CG offers',
-        //     icon: 'fa fa-money',
-        //     points: 600,
-        //   },
-        //   properties: {
-        //     subtitle:
-        //       'Support this free tool by completing an offer from one of our advertisers. This way we can get funding for this project and continue updating it while keeping it free forever',
-        //     buttonText: 'Complete An Offer',
-        //     func() {
-        //       // vm.$store.commit('app/SET_OFFER_DIALOG', true)
-        //       vm.$store.commit('app/SET_OFFER_NETWORK', 'CG')
-        //       // vm.$store.dispatch('app/CGOffers')
-        //       vm.$router.push({
-        //         name: 'points',
-        //       })
-        //     },
-        //   },
-        // },
         {
           component: Custom,
           title: {
-            text: 'Complete some offers',
+            text: 'Complete AM offers',
             icon: 'fa fa-money',
-            points: 600,
+            points: 'Unlimited',
           },
           properties: {
             subtitle:
               'Support this free tool by completing 3 offers from one or more of our sponsors. This way we can get funding for this project and continue updating it while you can get it at no $0',
             buttonText: 'Complete An Offer',
             func() {
-              // vm.$store.commit('app/SET_OFFER_DIALOG', true)
-              // vm.$store.commit('app/SET_OFFER_NETWORK', 'AM')
-              // vm.$store.dispatch('app/AMOffers')
-              // vm.$router.push({
-              //   name: 'points',
-              // })
-              const hostname = window.location.origin
-              const url = hostname + '/points'
-              window.open(url, '_blank')
+              vm.$store.commit('app/SET_OFFER_DIALOG', true)
+              vm.$store.commit('app/SET_OFFER_NETWORK', 'AM')
+              vm.$store.dispatch('app/AMOffers')
+              // const hostname = window.location.origin
+              // const url = hostname + '/points'
+              // window.open(url, '_blank')
             },
           },
         },
-        // {
-        //   component: Custom,
-        //   title: {
-        //     text: 'Complete OG Offers',
-        //     icon: 'fa fa-money',
-        //     points: 600,
-        //   },
-        //   properties: {
-        //     subtitle:
-        //       'Support this free tool by completing an offer from one of our advertisers. This way we can get funding for this project and continue updating it while keeping it free forever',
-        //     buttonText: 'Complete An Offer',
-        //     func() {
-        //       // vm.$store.commit('app/SET_OFFER_DIALOG', true)
-        //       vm.$store.commit('app/SET_OFFER_NETWORK', 'OG')
-        //       // vm.$store.dispatch('app/OGOffers')
-        //       vm.$router.push({
-        //         name: 'points',
-        //       })
-        //     },
-        //   },
-        // },
+        {
+          component: Custom,
+          title: {
+            text: 'Complete CG offers',
+            icon: 'fa fa-money',
+            points: 'Unlimited',
+          },
+          properties: {
+            subtitle:
+              'Support this free tool by completing an offer from one of our advertisers. This way we can get funding for this project and continue updating it while keeping it free forever',
+            buttonText: 'Complete An Offer',
+            func() {
+              vm.$store.commit('app/SET_OFFER_DIALOG', true)
+              vm.$store.commit('app/SET_OFFER_NETWORK', 'CG')
+              vm.$store.dispatch('app/CGOffers')
+            },
+          },
+        },
+        {
+          component: Custom,
+          title: {
+            text: 'Complete OG Offers',
+            icon: 'fa fa-money',
+            points: 'Unlimited',
+          },
+          properties: {
+            subtitle:
+              'Support this free tool by completing an offer from one of our advertisers. This way we can get funding for this project and continue updating it while keeping it free forever',
+            buttonText: 'Complete An Offer',
+            func() {
+              vm.$store.commit('app/SET_OFFER_DIALOG', true)
+              vm.$store.commit('app/SET_OFFER_NETWORK', 'OG')
+              vm.$store.dispatch('app/OGOffers')
+            },
+          },
+        },
         {
           component: Custom,
           title: {

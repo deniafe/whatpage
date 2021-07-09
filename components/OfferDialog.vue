@@ -10,7 +10,9 @@
       <div class="modal-content py-4 text-left px-6">
         <!--Title-->
         <div class="flex justify-between items-center pb-3">
-          <p class="text-2xl text-white font-bold">Header</p>
+          <p class="text-2xl text-white font-bold">
+            Complete {{ network }} Offers To Earn Points
+          </p>
           <div
             class="modal-close cursor-pointer z-50 rounded-full hover:bg-primary p-2"
             @click="toggleModal(false)"
@@ -54,6 +56,7 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
+      user: 'auth/user',
       offerModal: 'app/offerDialog',
       offerNetwork: 'app/offerNetwork',
       AMOffers: 'app/AMOffers',
@@ -67,7 +70,7 @@ export default {
         offers = this.AMOffers.map((offer) => {
           return {
             id: offer.campaign_id,
-            url: offer.url,
+            url: offer.url.replace('sid=', `sid=${this.user.id}`),
             image: `https://www.adworkmedia.com/images/campPreview/${offer.campaign_id}.png`,
             name: offer.campaign_name,
             desc: offer.campaign_desc,
@@ -89,7 +92,7 @@ export default {
         offers = this.OGOffers.map((offer) => {
           return {
             id: offer.offerid,
-            url: offer.link,
+            url: offer.link.replace('aff_sub=', `aff_sub=${this.user.id}`),
             image: offer.picture,
             name: offer.name,
             desc: offer.description,
@@ -98,6 +101,17 @@ export default {
         })
       }
       return offers
+    },
+    network() {
+      let network
+      if (this.offerNetwork === 'AM') {
+        network = 'Adwork Media'
+      } else if (this.offerNetwork === 'CG') {
+        network = 'CPA Grip'
+      } else if (this.offerNetwork === 'OG') {
+        network = 'Ogads'
+      }
+      return network
     },
   },
   methods: {

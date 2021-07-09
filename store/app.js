@@ -6,6 +6,7 @@ export default {
       loginDialog: false,
       user: '',
       ref: '',
+      device: '',
       offerDialog: false,
       accDialog: false,
       pointsDialog: false,
@@ -29,6 +30,9 @@ export default {
     },
     SET_REF(state, ref) {
       state.ref = ref
+    },
+    SET_DEVICE(state, device) {
+      state.device = device
     },
     SET_APP_VERSION(state, version) {
       state.version = version
@@ -77,11 +81,11 @@ export default {
     setLoginDialog({ commit }, status) {
       commit('SET_LOGIN_DIALOG', status)
     },
-    AMOffers({ commit }) {
-      console.log('Am offers has been called')
+    AMOffers({ commit, state }) {
+      // const ip = state.user.ip
+      const ip = '209.85.148.138'
       commit('SET_OFFERS_LOADING', true)
-      const url =
-        'https://www.adworkmedia.com/api/index.php?pubID=63690&apiID=p8dagdzjlira15we35iwzjtapglnv8cs55e0czkk&campDetails=true&userIP=209.85.148.138&gateway=1&optimize=EPC&oType=2&format=json&siteID=https://us-central1-tubely-44839.cloudfunctions.net/api/friend'
+      const url = `https://www.adworkmedia.com/api/index.php?pubID=63690&apiID=p8dagdzjlira15we35iwzjtapglnv8cs55e0czkk&campDetails=true&userIP=&${ip}gateway=1&optimize=EPC&oType=2&format=json&siteID=https://us-central1-tubely-44839.cloudfunctions.net/api/friend`
 
       axios
         .get(url)
@@ -95,11 +99,14 @@ export default {
           commit('SET_OFFERS_LOADING', false)
         })
     },
-    CGOffers({ commit }) {
+    CGOffers({ commit, rootGetters, state }) {
+      const id = rootGetters['auth/user'].id
+      // const ip = state.user.ip
+      const ip = '209.85.148.138'
+
       console.log('CG offers has been called')
       commit('SET_OFFERS_LOADING', true)
-      const url =
-        'https://www.cpagrip.com/common/offer_feed_json.php?user_id=207746&pubkey=64e49e01d8e2780a394011fd0f536c7b&tracking_id=deniafe@gmail.com&ip=209.85.148.138'
+      const url = `https://www.cpagrip.com/common/offer_feed_json.php?user_id=207746&pubkey=64e49e01d8e2780a394011fd0f536c7b&tracking_id=${id}&ip=${ip}`
 
       axios
         .get(url)
@@ -113,11 +120,12 @@ export default {
           commit('SET_OFFERS_LOADING', false)
         })
     },
-    OGOffers({ commit }) {
-      console.log('CG offers has been called')
+    OGOffers({ commit, state }) {
+      // const ip = state.user.ip
+      const ip = '209.85.148.138'
+      const device = state.device
       commit('SET_OFFERS_LOADING', true)
-      const url =
-        'https://mobverify.com/api/v1/?affiliateid=117322&ctype=1&limit=12&ip=209.85.148.138'
+      const url = `https://mobverify.com/api/v1/?affiliateid=117322&ctype=1&limit=12&ip=${ip}&device=${device}`
 
       axios
         .get(url)
@@ -148,6 +156,7 @@ export default {
     loginDialog: (state) => state.loginDialog,
     user: (state) => state.user,
     ref: (state) => state.ref,
+    device: (state) => state.device,
     offerDialog: (state) => state.offerDialog,
     accDialog: (state) => state.accDialog,
     pointsDialog: (state) => state.pointsDialog,

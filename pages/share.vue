@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import DeviceDetector from 'device-detector-js'
 import { db } from '@/plugins/firebase'
 import { mapGetters } from 'vuex'
 const Actions = () => import('../components/Actions')
@@ -90,8 +91,8 @@ export default {
   mounted() {
     this.$store.dispatch('auth/checkAuth')
     this.browserHeight = document.body.clientHeight
-    const browserWidth = document.body.clientWidth
-    this.checkWidth(browserWidth)
+    this.checkWidth()
+    this.detectDevice()
   },
   beforeDestroy() {
     if (this.unsubscribe) this.unsubscribe()
@@ -100,7 +101,25 @@ export default {
     change(tab) {
       this.tab = tab
     },
-    checkWidth(width) {
+    detectDevice() {
+      const deviceDetector = new DeviceDetector()
+      const userAgent = navigator.userAgent
+      const device = deviceDetector.parse(userAgent)
+      if (device.os.name === 'Android') {
+        this.$store.commit('app/SET_DEVICE', 'android')
+      } else if (device.os.name === 'Windows') {
+        this.$store.commit('app/SET_DEVICE', 'desktop')
+      } else if (device.os.name === 'iOS') {
+        if (device.device.model === 'iPad') {
+          this.$store.commit('app/SET_DEVICE', 'ipad')
+        } else if (device.device.model === 'iPhone') {
+          this.$store.commit('app/SET_DEVICE', 'iphone')
+        }
+      }
+      console.log(device.os)
+    },
+    checkWidth() {
+      const width = document.body.clientWidth
       if (width < 1024) {
         this.tab = 'actions'
       }

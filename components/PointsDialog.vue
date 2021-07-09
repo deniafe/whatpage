@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import { db, firebase } from '@/plugins/firebase'
+// import { db, firebase } from '@/plugins/firebase'
 import { required, email } from 'vuelidate/lib/validators'
 import { mapGetters } from 'vuex'
 export default {
@@ -97,65 +97,65 @@ export default {
     }),
   },
   watch: {
-    async user(newValue, oldValue) {
-      if (this.user) {
-        if (!this.totalPoints) {
-          const vm = this
-          const doc = await db.collection('users').doc(this.user.id).get()
-          if (doc.exists) {
-            const userData = doc.data()
-            userData.id = doc.id
-            vm.$store.commit('app/SET_USER', userData)
-          }
-        }
-      }
-    },
+    // async user(newValue, oldValue) {
+    //   if (this.user) {
+    //     if (!this.totalPoints) {
+    //       const vm = this
+    //       const doc = await db.collection('users').doc(this.user.id).get()
+    //       if (doc.exists) {
+    //         const userData = doc.data()
+    //         userData.id = doc.id
+    //         vm.$store.commit('app/SET_USER', userData)
+    //       }
+    //     }
+    //   }
+    // },
   },
   methods: {
-    toggleModal(val) {
-      this.$store.commit('app/SET_POINTS_DIALOG', val)
-    },
-    async addPoints() {
-      this.buttonClicked = true
-      const vm = this
-      try {
-        if (this.user.id && this.email === this.user.email) {
-          if (this.user.offerPoints === 0) {
-            await db
-              .collection('users')
-              .doc(vm.user.id)
-              .update({
-                offerPoints: firebase.firestore.FieldValue.increment(600),
-                totalPoints: firebase.firestore.FieldValue.increment(600),
-              })
-            vm.$router.push({
-              name: 'share',
-              params: { lead: vm.user.id },
-              // props: { campaignId: vm.campId },
-            })
-          } else {
-            const alert = {
-              status: true,
-              message: `You can't generate more points right now. Try again tomorrow.`,
-            }
-            this.$store.dispatch('app/setAlert', alert)
-            this.$store.dispatch('app/closeAlert')
-            this.buttonClicked = false
-          }
-        } else {
-          const alert = {
-            status: true,
-            message: `Could not add any points: Your email is incorrect`,
-          }
-          this.$store.dispatch('app/setAlert', alert)
-          this.$store.dispatch('app/closeAlert')
-          this.buttonClicked = false
-        }
-        this.$store.commit('app/SET_POINTS_DIALOG', false)
-      } catch (error) {
-        console.log({ error: 'Something went wrong' }, error)
-      }
-    },
+    // toggleModal(val) {
+    //   this.$store.commit('app/SET_POINTS_DIALOG', val)
+    // },
+    // async addPoints() {
+    //   this.buttonClicked = true
+    //   const vm = this
+    //   try {
+    //     if (this.user.id && this.email === this.user.email) {
+    //       if (this.user.offerPoints === 0) {
+    //         await db
+    //           .collection('users')
+    //           .doc(vm.user.id)
+    //           .update({
+    //             offerPoints: firebase.firestore.FieldValue.increment(600),
+    //             totalPoints: firebase.firestore.FieldValue.increment(600),
+    //           })
+    //         vm.$router.push({
+    //           name: 'share',
+    //           params: { lead: vm.user.id },
+    //           // props: { campaignId: vm.campId },
+    //         })
+    //       } else {
+    //         const alert = {
+    //           status: true,
+    //           message: `You can't generate more points right now. Try again tomorrow.`,
+    //         }
+    //         this.$store.dispatch('app/setAlert', alert)
+    //         this.$store.dispatch('app/closeAlert')
+    //         this.buttonClicked = false
+    //       }
+    //     } else {
+    //       const alert = {
+    //         status: true,
+    //         message: `Could not add any points: Your email is incorrect`,
+    //       }
+    //       this.$store.dispatch('app/setAlert', alert)
+    //       this.$store.dispatch('app/closeAlert')
+    //       this.buttonClicked = false
+    //     }
+    //     this.$store.commit('app/SET_POINTS_DIALOG', false)
+    //   } catch (error) {
+    //     console.log({ error: 'Something went wrong' }, error)
+    //   }
+    // },
   },
 }
 </script>
