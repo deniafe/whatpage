@@ -38,7 +38,8 @@ export default {
           component: RewardDetail,
           title: {
             text: 'Tubely PRO',
-            desc: 'Win full tubely features by getting a PRO membership',
+            desc:
+              'Win full tubely features for 30 days by getting a PRO membership',
             image: '/laptop.png',
             points: 1000,
           },
@@ -48,7 +49,7 @@ export default {
               'Collect enough points and get free PRO membership for Tubely',
             async func() {
               const endDate = new Date()
-              endDate.setDate(endDate.getDate() + 14)
+              endDate.setDate(endDate.getDate() + 30)
               console.log('endDate :', endDate)
               if (vm.user.totalPoints >= 1000) {
                 vm.$store.commit('app/SET_REWARD_LOADING', true)
@@ -62,14 +63,12 @@ export default {
                           new Date()
                         ),
                         endDate: firebase.firestore.Timestamp.fromDate(endDate),
-                        interval: 14,
+                        interval: 30,
                         plan: 'pro',
                       },
-                      referralPoints: 0,
-                      telegramPoints: 0,
-                      youtubePoints: 0,
-                      offerPoints: 0,
-                      totalPoints: 0,
+                      totalPoints: firebase.firestore.FieldValue.increment(
+                        -1000
+                      ),
                     })
                   vm.$store.commit('app/SET_REWARD_LOADING', false)
                   const alert = {
@@ -112,6 +111,56 @@ export default {
             buttonText: 'Claim Reward',
             description:
               'You can use Tubely for 2 months absolutely free, you just need 2000 points.',
+            async func() {
+              const endDate = new Date()
+              endDate.setDate(endDate.getDate() + 60)
+              console.log('endDate :', endDate)
+              if (vm.user.totalPoints >= 2000) {
+                vm.$store.commit('app/SET_REWARD_LOADING', true)
+                try {
+                  await db
+                    .collection('users')
+                    .doc(vm.user.id)
+                    .update({
+                      membership: {
+                        startDate: firebase.firestore.Timestamp.fromDate(
+                          new Date()
+                        ),
+                        endDate: firebase.firestore.Timestamp.fromDate(endDate),
+                        interval: 60,
+                        plan: 'pro',
+                      },
+                      totalPoints: firebase.firestore.FieldValue.increment(
+                        -2000
+                      ),
+                    })
+                  vm.$store.commit('app/SET_REWARD_LOADING', false)
+                  const alert = {
+                    status: true,
+                    message: `This reward has been successful applied to your tubely account. You can now enjoy all of tubely's full features for 2 months`,
+                  }
+                  vm.$store.dispatch('app/setAlert', alert)
+                  vm.$store.dispatch('app/closeAlert')
+                } catch (error) {
+                  vm.$store.commit('app/SET_REWARD_LOADING', false)
+                  const alert = {
+                    status: true,
+                    message: error,
+                  }
+                  console.log(error)
+                  vm.$store.dispatch('app/setAlert', alert)
+                  vm.$store.dispatch('app/closeAlert')
+                }
+              } else {
+                const alert = {
+                  status: true,
+                  message: `You do not have enough points to claim this reward. Complete more offers to claim this reward`,
+                }
+                vm.$store.dispatch('app/setAlert', alert)
+                vm.$store.dispatch('app/closeAlert')
+                vm.buttonClicked = false
+              }
+            },
           },
         },
         {
@@ -126,6 +175,56 @@ export default {
             buttonText: 'Claim Reward',
             description:
               'Want the power of Tubely for 3 months for free. Collect 3000 points and get 3 months Tubely license for free!',
+            async func() {
+              const endDate = new Date()
+              endDate.setDate(endDate.getDate() + 90)
+              console.log('endDate :', endDate)
+              if (vm.user.totalPoints >= 3000) {
+                vm.$store.commit('app/SET_REWARD_LOADING', true)
+                try {
+                  await db
+                    .collection('users')
+                    .doc(vm.user.id)
+                    .update({
+                      membership: {
+                        startDate: firebase.firestore.Timestamp.fromDate(
+                          new Date()
+                        ),
+                        endDate: firebase.firestore.Timestamp.fromDate(endDate),
+                        interval: 90,
+                        plan: 'pro',
+                      },
+                      totalPoints: firebase.firestore.FieldValue.increment(
+                        -3000
+                      ),
+                    })
+                  vm.$store.commit('app/SET_REWARD_LOADING', false)
+                  const alert = {
+                    status: true,
+                    message: `This reward has been successful applied to your tubely account. You can now enjoy all of tubely's full features for 3 months`,
+                  }
+                  vm.$store.dispatch('app/setAlert', alert)
+                  vm.$store.dispatch('app/closeAlert')
+                } catch (error) {
+                  vm.$store.commit('app/SET_REWARD_LOADING', false)
+                  const alert = {
+                    status: true,
+                    message: error,
+                  }
+                  console.log(error)
+                  vm.$store.dispatch('app/setAlert', alert)
+                  vm.$store.dispatch('app/closeAlert')
+                }
+              } else {
+                const alert = {
+                  status: true,
+                  message: `You do not have enough points to claim this reward. Complete more offers to claim this reward`,
+                }
+                vm.$store.dispatch('app/setAlert', alert)
+                vm.$store.dispatch('app/closeAlert')
+                vm.buttonClicked = false
+              }
+            },
           },
         },
       ]

@@ -19,6 +19,8 @@ export default {
       alert: '',
       leaderboardLeads: [],
       rewardLoading: false,
+      start_offer_loading: '',
+      completed_offers: [],
     }
   },
   mutations: {
@@ -73,6 +75,12 @@ export default {
     SET_REWARD_LOADING(state, status) {
       state.rewardLoading = status
     },
+    SET_START_OFFER_LOADING(state, offer) {
+      state.start_offer_loading = offer
+    },
+    SET_COMPLETED_OFFERS(state, offers) {
+      state.completed_offers = offers
+    },
   },
   actions: {
     setUser({ commit }, userData) {
@@ -82,10 +90,10 @@ export default {
       commit('SET_LOGIN_DIALOG', status)
     },
     AMOffers({ commit, state }) {
-      // const ip = state.user.ip
-      const ip = '209.85.148.138'
+      const ip = state.user.ip
+      // const ip = '209.85.148.138'
       commit('SET_OFFERS_LOADING', true)
-      const url = `https://www.adworkmedia.com/api/index.php?pubID=63690&apiID=p8dagdzjlira15we35iwzjtapglnv8cs55e0czkk&campDetails=true&userIP=&${ip}gateway=1&optimize=EPC&oType=2&format=json&siteID=https://us-central1-tubely-44839.cloudfunctions.net/api/friend`
+      const url = `https://www.adworkmedia.com/api/index.php?pubID=63690&apiID=p8dagdzjlira15we35iwzjtapglnv8cs55e0czkk&campDetails=true&userIP=${ip}&gateway=1&optimize=EPC&oType=2&format=json`
 
       axios
         .get(url)
@@ -101,12 +109,12 @@ export default {
     },
     CGOffers({ commit, rootGetters, state }) {
       const id = rootGetters['auth/user'].id
-      // const ip = state.user.ip
-      const ip = '209.85.148.138'
+      const ip = state.user.ip
+      // const ip = '209.85.148.138'
 
       console.log('CG offers has been called')
       commit('SET_OFFERS_LOADING', true)
-      const url = `https://www.cpagrip.com/common/offer_feed_json.php?user_id=207746&pubkey=64e49e01d8e2780a394011fd0f536c7b&tracking_id=${id}&ip=${ip}`
+      const url = `https://www.cpagrip.com/common/offer_feed_json.php?user_id=207746&pubkey=64e49e01d8e2780a394011fd0f536c7b&tracking_id=tubely-${id}&ip=${ip}`
 
       axios
         .get(url)
@@ -121,8 +129,8 @@ export default {
         })
     },
     OGOffers({ commit, state }) {
-      // const ip = state.user.ip
-      const ip = '209.85.148.138'
+      const ip = state.user.ip
+      // const ip = '209.85.148.138'
       const device = state.device
       commit('SET_OFFERS_LOADING', true)
       const url = `https://mobverify.com/api/v1/?affiliateid=117322&ctype=1&limit=12&ip=${ip}&device=${device}`
@@ -169,5 +177,7 @@ export default {
     alert: (state) => state.alert,
     leaderboardLeads: (state) => state.leaderboardLeads,
     rewardLoading: (state) => state.rewardLoading,
+    start_offer_loading: (state) => state.start_offer_loading,
+    completed_offers: (state) => state.completed_offers,
   },
 }

@@ -84,6 +84,7 @@ export default {
     authUser(newValue, oldValue) {
       if (newValue) {
         this.getUser()
+        this.checkOffer()
         console.log('New Value: ', newValue)
       }
     },
@@ -140,8 +141,9 @@ export default {
               }
               if (change.type === 'modified') {
                 const user = change.doc.data()
-                user.id = snapshot.id
+                user.id = vm.authUser.id
                 vm.$store.commit('app/SET_USER', user)
+                this.checkOffer()
               }
               if (change.type === 'removed') {
                 console.log('Removed city: ', change.doc.data())
@@ -154,6 +156,21 @@ export default {
             vm.$router.push({ name: 'index' })
           }
         )
+    },
+    async checkOffer() {
+      const vm = this
+      const query = await db
+        .collection('offers')
+        .where('userId', '==', vm.user.id)
+        .get()
+      if (!query.empty) {
+        const offers = query.docs.map((doc) => doc.data())
+        vm.$store.commit('app/SET_COMPLETED_OFFERS', offers)
+        console.log(offers)
+      } else {
+        console.log('This user has not completed any offers')
+      }
+      console.log('Now I am going to check out some offers')
     },
   },
 }

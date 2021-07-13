@@ -49,7 +49,9 @@ export default {
       return this.user.name || this.user.email
     },
     progress() {
-      return (this.totalPoints / 1000) * 100
+      let totalPoints = this.totalPoints
+      if (this.totalPoints >= 1000) totalPoints = 1000
+      return (totalPoints / 1000) * 100
     },
     styling() {
       return {

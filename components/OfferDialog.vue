@@ -38,6 +38,13 @@
           >
             <OfferCard v-for="offer in offers" :key="offer.id" :offer="offer" />
           </div>
+          <div v-if="offers.length === 0 && !offersLoading" class="mt-6">
+            <img class="h-1/2 w-1/2 mx-auto" src="/no_offers.svg" />
+            <div class="text-white text-center">
+              There are no offers for you to complete at the moment. Switch to a
+              mobile device to see if there are any available mobile offers.
+            </div>
+          </div>
         </div>
         <div class="mt-12 text-center">
           <i
@@ -65,12 +72,12 @@ export default {
       offersLoading: 'app/offersLoading',
     }),
     offers() {
-      let offers
+      let offers = []
       if (this.offerNetwork === 'AM') {
         offers = this.AMOffers.map((offer) => {
           return {
             id: offer.campaign_id,
-            url: offer.url.replace('sid=', `sid=${this.user.id}`),
+            url: offer.url.replace('sid=', `sid=tubely-${this.user.id}`),
             image: `https://www.adworkmedia.com/images/campPreview/${offer.campaign_id}.png`,
             name: offer.campaign_name,
             desc: offer.campaign_desc,
@@ -92,7 +99,10 @@ export default {
         offers = this.OGOffers.map((offer) => {
           return {
             id: offer.offerid,
-            url: offer.link.replace('aff_sub=', `aff_sub=${this.user.id}`),
+            url: offer.link.replace(
+              'aff_sub=',
+              `aff_sub=tubely-${this.user.id}`
+            ),
             image: offer.picture,
             name: offer.name,
             desc: offer.description,
