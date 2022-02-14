@@ -1,12 +1,10 @@
 <template>
   <div>
-    <Alert />
     <div>
-      <LoginDialog />
       <Nav />
-      <DHeader />
-      <DFeatures />
+      <Header />
       <Features />
+      <Features2 />
       <Testimonial />
       <CTA />
       <Footer />
@@ -23,7 +21,7 @@ export default {
   // },
   // components: { Testimonial },
   head: {
-    titleTemplate: '%s - Tubely',
+    titleTemplate: '%s - Automate WhatsApp Marketing',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

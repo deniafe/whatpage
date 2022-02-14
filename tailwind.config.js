@@ -10,14 +10,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: '#0c0715',
-        secondary: '#221f2e',
-        primary: '#f32756',
+        background: '#ffffff',
+        secondary: '#fafafa',
+        primary: '#25d366',
         text: '#777c85',
         card: '#242232',
-        headingText: '#d5d4de',
+        headingText: '#333',
         input: '#181625',
-        appBlue: '#00a2ff',
+        blue: '#087db3',
+        pink: '#f32756',
         success: '#00f2c3',
         info: '#1d8cf8',
         warning: '#ff8d72',
